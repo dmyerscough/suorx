@@ -1,0 +1,34 @@
+{% load staticfiles %}
+{% load i18n %}
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="{% trans 'Suorx URL Shortener' %}" />
+<title>Suorx</title>
+<link rel="stylesheet" href="{% static 'style/style.css' %}">
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div id="container">
+    <h1><a href=".">{% trans 'Suorx' %}</a></h1>
+    <form>
+      {% csrf_token %}
+      <div id="field">
+        <input id="urlinput" type="text" placeholder="{% trans 'Paste a link to shorten it...' %}">
+	<input id="go" type="submit" value="{% trans 'SHORTEN' %}">
+	<div class="clear"></div>
+      </div>
+    </form>	
+
+    <div id="url" class="hide"><center><h3>replace.me/123456</h3></center></div>
+  </div>
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="{% static 'js/init.js' %}"></script>
+</body>
+</html>

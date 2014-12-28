@@ -1,0 +1,13 @@
+Django==1.7.1
+pylibmc==1.4.1
+dj-database-url==0.3.0
+dj-static==0.0.6
+django-security==0.1.12
+django-secure==1.0.1
+django-toolbelt==0.0.1
+gunicorn==19.1.1
+pep8==1.5.7
+psycopg2==2.5.4
+selenium==2.44.0
+static3==0.5.1
+wsgiref==0.1.2
