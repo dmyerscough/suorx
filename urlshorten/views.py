@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import (HttpResponse, HttpResponseBadRequest,
                          HttpResponsePermanentRedirect, HttpResponseNotFound)
 
-from suorx import settings
+from suorx import prod_settings as settings
 from shortner import UrlShortner
 
 from urlshorten.models import ShortenUrls
@@ -50,12 +50,15 @@ def shorten(request):
             behaviors={'tcp_nodelay': True, 'ketama': True, 'no_block': True}
         )
 
-    if 'http' in urlparse.urlparse(url).scheme:
+    if urlparse.urlparse(url).scheme.startswith('http'):
         pass
     elif urlparse.urlparse(url).scheme == '':
         url = 'http://' + url
     else:
         return HttpResponseBadRequest('Invalid URL')
+
+    if url.startswith('http://' + settings.DOMAIN) or url.startswith('https://' + settings.DOMAIN):
+        return HttpResponseBadRequest('This domain has already been shorten')
 
     site_code = shorten.encode(url)
     _cache_url = mc.get(site_code)
@@ -63,7 +66,7 @@ def shorten(request):
     # Cache the users shortened URL and log URL
     if _cache_url:
         return HttpResponse(
-            json.dumps({'url': '/'.join([settings.DOMAIN, site_code])}),
+            json.dumps({'url': '/'.join(['http://' + settings.DOMAIN, site_code])}),
             content_type="application/json"
         )
 
@@ -77,7 +80,7 @@ def shorten(request):
         site.save()
 
     return HttpResponse(
-        json.dumps({'url': '/'.join([settings.DOMAIN, site.short])}),
+        json.dumps({'url': '/'.join(['http://' + settings.DOMAIN, site.short])}),
         content_type="application/json"
     )
 

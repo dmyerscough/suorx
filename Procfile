@@ -1,1 +1,1 @@
-web: gunicorn suorx.wsgi --log-file -
+web: gunicorn suorx.prod_wsgi --log-file -
