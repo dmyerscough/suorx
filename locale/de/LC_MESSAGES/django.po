@@ -1,0 +1,51 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-12-28 22:54+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: templates/404.html:10
+msgid "404 File Not Found"
+msgstr "404 Datei nicht gefunden"
+
+#: templates/404.html:22
+msgid "Looks like you took a wrong turn."
+msgstr "Falsche Verzweigung"
+
+#: templates/500.html:10
+msgid "500 Error"
+msgstr "500 Fehler"
+
+#: templates/500.html:22
+msgid "Looks like there was an error, please try again shortly."
+msgstr "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später wieder"
+
+#: urlshorten/templates/index.html:8
+msgid "Suorx URL Shortener"
+msgstr ""
+
+#: urlshorten/templates/index.html:19
+msgid "Suorx"
+msgstr ""
+
+#: urlshorten/templates/index.html:23
+msgid "Paste a link to shorten it..."
+msgstr "Link eintragen um diesen zu kürzen"
+
+#: urlshorten/templates/index.html:24
+msgid "SHORTEN"
+msgstr ""
