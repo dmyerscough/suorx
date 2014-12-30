@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django.http import Http404
 from django.shortcuts import render
 from django.http import (HttpResponse, HttpResponseBadRequest,
                          HttpResponsePermanentRedirect, HttpResponseNotFound)
@@ -112,4 +113,4 @@ def redirect(request, url):
 
             return HttpResponsePermanentRedirect(site.url)
         except ShortenUrls.DoesNotExist:
-            return HttpResponseNotFound('')
+            raise Http404
