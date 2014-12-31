@@ -7,6 +7,9 @@ from suorx import settings
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
+import time
+
+
 class UrlShortnerTest(TestCase):
 
     def setUp(self):
@@ -54,26 +57,16 @@ class UrlShortnerTest(TestCase):
 
 class NewVisitor(TestCase):
 
-    def setUp(self):
-        '''
-
-        '''
-        self.browser = webdriver.Firefox()
-        self.browser.implicitly_wait(3)
-
-    def tearDown(self):
-        '''
-
-        '''
-        self.browser.quit()
-
     def test_shorten_url(self):
         '''
 
         '''
-        self.browser.get('http://localhost:8000')
+        browser = webdriver.Firefox()
+        browser.implicitly_wait(3)
 
-        inputbox = self.browser.find_element_by_id('urlinput')
+        browser.get('http://www.suorx.com')
+
+        inputbox = browser.find_element_by_id('urlinput')
 
         self.assertEqual(
             inputbox.get_attribute('placeholder'),
@@ -83,6 +76,48 @@ class NewVisitor(TestCase):
         inputbox.send_keys('www.google.com')
         inputbox.send_keys(Keys.ENTER)
 
-        url = self.browser.find_element_by_id('url')
+        url = browser.find_element_by_id('url')
 
-        self.assertEqual('/'.join([settings.DOMAIN, 'Lt']), url.text)
+        time.sleep(2)
+
+        self.assertEqual('/'.join(['http://' + settings.DOMAIN, 'Lt']), url.text)
+        browser.quit()
+
+    def test_language(self):
+        '''
+
+        '''
+        languages = {'de': u'Link eintragen um diesen zu kürzen',
+                     'fr': u'Copier un lien pour en réduire sa taille',
+                     'id': u'Tempelkan link untuk diperpendek...',
+                     'it': u'Incolla un link per abbreviarlo...',
+                     'ja': u'短縮したいURLを入力してください。',
+                     'ko': u'링크를 단축합시다...',
+                     'ru': u'Вставьте ссылку, чтобы сделать её сократить...',
+                     'sv': u'Klistra in en länk för att förkorta den',
+                     'zh': u'将网址缩短...'}
+
+        for lang, phrase in languages.items():
+            profile = webdriver.FirefoxProfile()
+            profile.set_preference('intl.accept_languages', lang)
+
+            browser = webdriver.Firefox(firefox_profile=profile)
+            browser.implicitly_wait(3)
+
+            browser.get('http://www.suorx.com')
+
+            inputbox = browser.find_element_by_id('urlinput')
+
+            self.assertEqual(
+                inputbox.get_attribute('placeholder'),
+                phrase
+            )
+
+            inputbox.send_keys('www.google.com')
+            inputbox.send_keys(Keys.ENTER)
+
+            url = browser.find_element_by_id('url')
+            time.sleep(2)
+
+            self.assertEqual('/'.join(['http://' + settings.DOMAIN, 'Lt']), url.text)
+            browser.quit()
