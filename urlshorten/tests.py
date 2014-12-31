@@ -22,11 +22,11 @@ class UrlShortnerTest(TestCase):
         '''
         Ensure specific URL's always return consistent results
         '''
-        urls = {'google.com': 'P7',
-                'www.google.com': 'MO',
-                'https://www.example.com': 'Ua',
-                'http://www.facebook.com': 'JA',
-                'http://www.google.com/about.html': 'KR'}
+        urls = {'google.com': 'xZus',
+                'www.google.com': 'trL5',
+                'https://www.example.com': 'xWoa',
+                'http://www.facebook.com': 'stiq',
+                'http://www.google.com/about.html': 's78f'}
 
         for url, idx in urls.items():
             self.assertEqual(self.url.encode(url), idx)

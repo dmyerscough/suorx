@@ -41,4 +41,4 @@ class UrlShortner(object):
         else:
             raise TypeError('You must supply either a string or an integer')
 
-        return self.__encode(site)
+        return self.__encode(site * 1987)
